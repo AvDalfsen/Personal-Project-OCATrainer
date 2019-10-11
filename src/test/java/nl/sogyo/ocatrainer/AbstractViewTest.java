@@ -36,11 +36,11 @@ public abstract class AbstractViewTest extends ParallelTest {
     public ScreenshotOnFailureRule rule = new ScreenshotOnFailureRule(this,
             false);
 
-    public AbstractViewTest() {
+    AbstractViewTest() {
         this("", By.tagName("body"));
     }
 
-    protected AbstractViewTest(String route, By rootSelector) {
+    private AbstractViewTest(String route, By rootSelector) {
         this.route = route;
         this.rootSelector = rootSelector;
     }
@@ -73,7 +73,7 @@ public abstract class AbstractViewTest extends ParallelTest {
      * @param element       web element to check for the theme
      * @param themeClass    theme class (such as {@code Lumo.class}
      */
-    protected void assertThemePresentOnElement(
+    void assertThemePresentOnElement(
             WebElement element, Class<? extends AbstractTheme> themeClass) {
         String themeName = themeClass.getSimpleName().toLowerCase();
         Boolean hasStyle = (Boolean) executeScript("" +

@@ -1,18 +1,37 @@
 package nl.sogyo.ocatrainer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 class DatabaseRequests {
-    void createDatabaseConnection(String statement) {
+    void queryDatabase(String statement) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/oca_trainer", "henk", "henk");
             System.out.println("Database connection successful!");
-            Statement stmt = connection.createStatement();
-            stmt.execute(statement);
+            PreparedStatement ps = connection.prepareStatement(statement);
+            ResultSet resultSet = ps.executeQuery();
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (resultSet.next()) {
+                for (int i = 1; i <= columnsNumber; i++) {
+                    if (i > 1) System.out.print(",  ");
+                    String columnValue = resultSet.getString(i);
+                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
+                }
+                System.out.println("");
+            }
+            connection.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    void updateDatabase(String statement) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/oca_trainer", "henk", "henk");
+            System.out.println("Database connection successful!");
+            PreparedStatement ps = connection.prepareStatement(statement);
+            ps.executeUpdate();
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

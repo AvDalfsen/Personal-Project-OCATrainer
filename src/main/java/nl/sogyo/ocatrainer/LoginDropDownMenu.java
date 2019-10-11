@@ -6,6 +6,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 
@@ -15,7 +16,7 @@ class LoginDropDownMenu extends HorizontalLayout {
         popupContent.getStyle().set("border", "1px solid var(--lumo-primary-color)");
         popupContent.getThemeList().add("dark");
         popupContent.setWidth("300px");
-        popupContent.setHeight("300px");
+        popupContent.setHeight("400px");
         popupContent.setAlignItems(FlexComponent.Alignment.CENTER);
         popupContent.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
@@ -30,13 +31,16 @@ class LoginDropDownMenu extends HorizontalLayout {
         newUsernameField.setPlaceholder("New username");
         PasswordField newPasswordField = new PasswordField("Password");
         newPasswordField.setPlaceholder("Password");
+        EmailField newEmailField = new EmailField("Your E-Mail");
+        newEmailField.setPlaceholder("Email@gmail.com");
         Button submitNewUserButton = new Button("Submit new user");
         Button cancelButton = new Button("Cancel");
 
         loginButton.addClickListener(buttonClickEvent -> Notification.show(usernameField.getValue() + " " + passwordField.getValue()));
         newUserButton.addClickListener(buttonClickEvent -> popupContent.removeAll());
-        newUserButton.addClickListener(buttonClickEvent -> popupContent.add(newUsernameField, newPasswordField, submitNewUserButton, cancelButton));
-//        submitNewUserButton.addClickListener(buttonClickEvent -> new DatabaseRequests().createDatabaseConnection("INSERT INTO "));
+        newUserButton.addClickListener(buttonClickEvent -> popupContent.add(newUsernameField, newPasswordField, newEmailField, submitNewUserButton, cancelButton));
+        submitNewUserButton.addClickListener(buttonClickEvent -> new DatabaseRequests().updateDatabase(
+                "INSERT INTO users(username, password, email) VALUES (\""+newUsernameField.getValue()+"\",\""+newPasswordField.getValue()+"\",\""+newEmailField.getValue()+"\")"));
         cancelButton.addClickListener(buttonClickEvent -> popupContent.removeAll());
         cancelButton.addClickListener(buttonClickEvent -> popupContent.add(usernameField, passwordField, loginButton, newUserButton));
 

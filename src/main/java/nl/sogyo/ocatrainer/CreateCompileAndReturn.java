@@ -9,7 +9,8 @@ class CreateCompileAndReturn {
         File file = new File("test.java");
         file.delete();
         File newFile = new File("test.java");
-        
+
+            //Add functionality to simply create a new file. Create a new iteration of the file. Remove all files but the ones created in the last minute or so.
         if (file.createNewFile()) System.out.println("File is created!");
         else System.out.println("File already exists.");
 
@@ -55,7 +56,7 @@ class CreateCompileAndReturn {
             while ((line = reader.readLine()) != null) {
                 counter++;
                 compileResults.append(line);
-                if(counter == 1000) return "Computer says: \"No.\"\n\n1000 lines of output counted. Assumed stack overflow.\nProgram stopped prematurely.";
+                if(counter == 1000) return "Computer says: \"No.\"\n\n1000 lines of output counted. Assumed stack overflow.\nProgram aborted.";
             }
 
         } catch (IOException e) {

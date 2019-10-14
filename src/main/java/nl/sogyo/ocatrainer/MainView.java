@@ -2,16 +2,16 @@ package nl.sogyo.ocatrainer;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
-import java.io.*;
+import java.io.IOException;
 
 @Theme(value = Lumo.class)
 @StyleSheet("frontend://styles.css")
@@ -34,7 +34,6 @@ public class MainView extends VerticalLayout {
 
         HorizontalLayout headerLayout = new HorizontalLayout(dropDownButton);
         headerLayout.setJustifyContentMode(JustifyContentMode.CENTER);
-
         header.add(headerLayout);
         add(header);
     }
@@ -53,6 +52,7 @@ public class MainView extends VerticalLayout {
                 "}");
 
         TextArea compileResults = new TextArea("Just look at 'dem results!");
+        compileResults.setReadOnly(true);
         compileResults.setMinWidth("700px");
         compileResults.setMinHeight("200px");
 

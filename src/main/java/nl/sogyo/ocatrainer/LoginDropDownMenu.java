@@ -1,7 +1,9 @@
 package nl.sogyo.ocatrainer;
 
 import com.github.appreciated.papermenubutton.PaperMenuButton;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -10,9 +12,7 @@ import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 
-import javax.servlet.http.Cookie;
 import java.sql.SQLException;
-import java.util.concurrent.atomic.AtomicReference;
 
 class LoginDropDownMenu extends HorizontalLayout {
     LoginDropDownMenu() {
@@ -34,6 +34,7 @@ class LoginDropDownMenu extends HorizontalLayout {
         passwordField.setPlaceholder("Password");
         passwordField.setMinLength(1);
         passwordField.setErrorMessage("Please enter a password.");
+        Checkbox rememberMe = new Checkbox("Remember me");
         Button loginButton = new Button("Login");
         Button newUserButton = new Button("New User");
 
@@ -52,18 +53,10 @@ class LoginDropDownMenu extends HorizontalLayout {
         Button submitNewUserButton = new Button("Submit new user");
         Button cancelButton = new Button("Cancel");
 
-        AtomicReference<Cookie> userCookie = null;
-
         //Buttons
         loginButton.addClickListener(buttonClickEvent -> {
-            if(!new UserVerification().usernameVerification(usernameField.getValue())) Notification.show("That username doesn't exist!", 4000, Notification.Position.MIDDLE);
-        });
-        loginButton.addClickListener(buttonClickEvent -> {
-            if(!new UserVerification().passwordVerification(usernameField.getValue(), passwordField.getValue())) Notification.show("That password is incorrect!", 4000, Notification.Position.MIDDLE);
-            else {
-                assert false;
-                userCookie.set(new Cookie("user-cookie", usernameField.getValue()));
-            }
+            try { new AuthenticationService().login(usernameField.getValue(), passwordField.getValue(), rememberMe.getValue()); }
+            catch (SQLException | ClassNotFoundException e) { e.printStackTrace(); }
         });
 
         newUserButton.addClickListener(buttonClickEvent -> popupContent.removeAll());
@@ -81,7 +74,7 @@ class LoginDropDownMenu extends HorizontalLayout {
         cancelButton.addClickListener(buttonClickEvent -> popupContent.removeAll());
         cancelButton.addClickListener(buttonClickEvent -> popupContent.add(usernameField, passwordField, loginButton, newUserButton));
 
-        popupContent.add(usernameField, passwordField, loginButton, newUserButton);
+        popupContent.add(usernameField, passwordField, rememberMe, loginButton, newUserButton);
 
         add(new PaperMenuButton(new Button("Login"), popupContent));
     }

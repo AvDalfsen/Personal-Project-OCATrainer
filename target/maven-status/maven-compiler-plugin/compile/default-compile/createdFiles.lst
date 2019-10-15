@@ -1,4 +1,7 @@
 nl\sogyo\ocatrainer\DatabaseRequests.class
+nl\sogyo\ocatrainer\UserService.class
 nl\sogyo\ocatrainer\CreateCompileAndReturn.class
+nl\sogyo\ocatrainer\AuthenticationService.class
+nl\sogyo\ocatrainer\BuildPrivateUI.class
 nl\sogyo\ocatrainer\LoginDropDownMenu.class
-nl\sogyo\ocatrainer\UserVerification.class
+nl\sogyo\ocatrainer\BuildPublicUI.class

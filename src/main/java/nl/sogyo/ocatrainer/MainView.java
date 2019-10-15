@@ -8,9 +8,11 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
+import javax.servlet.http.Cookie;
 import java.io.IOException;
 
 @Theme(value = Lumo.class)
@@ -23,11 +25,11 @@ public class MainView extends VerticalLayout {
         setSizeFull();
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
-        buildHeader();
-        buildBody();
+        buildPublicHeader();
+        buildPrivateBody();
     }
 
-    private void buildHeader() {
+    private void buildPublicHeader() {
         H1 header = new H1("OCA Trainer");
         header.getElement().getThemeList().add("dark");
         LoginDropDownMenu dropDownButton = new LoginDropDownMenu();
@@ -38,8 +40,7 @@ public class MainView extends VerticalLayout {
         add(header);
     }
 
-    private void buildBody() {
-
+    private void buildPrivateBody() {
         TextArea codeField = new TextArea("Code your heart out.");
         codeField.setMinWidth("700px");
         codeField.setMinHeight("200px");
@@ -75,5 +76,19 @@ public class MainView extends VerticalLayout {
                 ),
                 compileButton
         );
+    }
+
+    private Cookie getCookieByName(String name) {
+        // Fetch all cookies from the request
+        Cookie[] cookies = VaadinService.getCurrentRequest().getCookies();
+
+        // Iterate to find cookie by its name
+        for (Cookie cookie : cookies) {
+            if (name.equals(cookie.getName())) {
+                return cookie;
+            }
+        }
+
+        return null;
     }
 }

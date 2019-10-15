@@ -35,6 +35,7 @@ public class DatabaseRequestsTest {
     @Test
     public void dynamicDatabaseConnectAndRequest() {
         dbReq.queryDatabase("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='oca_trainer'");
+        System.out.println(outContent.toString());
         assertTrue("When called with an SQL statement in the form of a string, the method should return the results of that query.\n" +
                 "In this specific case it should return the names of the tables contained in the database.",outContent.toString().contains("users"));
     }

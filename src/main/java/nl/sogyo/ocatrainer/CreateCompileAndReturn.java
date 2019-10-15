@@ -11,6 +11,7 @@ class CreateCompileAndReturn {
         File newFile = new File("test.java");
 
             //Add functionality to simply create a new file. Create a new iteration of the file. Remove all files but the ones created in the last minute or so.
+
         if (file.createNewFile()) System.out.println("File is created!");
         else System.out.println("File already exists.");
 

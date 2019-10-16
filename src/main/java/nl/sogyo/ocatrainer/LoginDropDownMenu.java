@@ -1,7 +1,6 @@
 package nl.sogyo.ocatrainer;
 
 import com.github.appreciated.papermenubutton.PaperMenuButton;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.notification.Notification;

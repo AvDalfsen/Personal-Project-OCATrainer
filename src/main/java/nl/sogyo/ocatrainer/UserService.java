@@ -26,5 +26,4 @@ class UserService {
     void removeRememberedUser(String id) throws SQLException, ClassNotFoundException {
         new DatabaseRequests().updateDatabase("DELETE FROM remember_users WHERE random_id = \"" + id + "\"");
     }
-
 }

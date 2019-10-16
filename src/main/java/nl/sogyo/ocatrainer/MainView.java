@@ -1,20 +1,16 @@
 package nl.sogyo.ocatrainer;
 
-import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
 @Theme(value = Lumo.class)
-@StyleSheet("frontend://styles.css")
 @PageTitle("OCA Trainer")
-@Route
-public class MainView extends VerticalLayout {
+@Route("")
+public class MainView extends AppLayout {
     public MainView() {
-        addClassName("main-view");
-
         if (!new AuthenticationService().isAuthenticated()) {
             showPublicComponent();
         } else {
@@ -23,13 +19,14 @@ public class MainView extends VerticalLayout {
     }
 
     private void showPublicComponent() {
-        removeAll();
-        add(new BuildPublicUI());
+        addToNavbar(new BuildPublicHeader());
+        addToDrawer(new BuildPublicMenu());
+        setContent(new BuildPublicContent());
     }
 
     private void showPrivateComponent() {
-        removeAll();
-        add(new BuildPrivateUI());
+        addToNavbar(new BuildPrivateHeader());
+        addToDrawer(new BuildPrivateMenu());
+        setContent(new BuildPrivateContent());
     }
-
 }

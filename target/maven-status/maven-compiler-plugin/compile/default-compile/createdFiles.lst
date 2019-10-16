@@ -1,7 +1,11 @@
+nl\sogyo\ocatrainer\BuildPrivateContent.class
+nl\sogyo\ocatrainer\BuildPrivateMenu.class
+nl\sogyo\ocatrainer\BuildPublicMenu.class
 nl\sogyo\ocatrainer\DatabaseRequests.class
 nl\sogyo\ocatrainer\UserService.class
+nl\sogyo\ocatrainer\BuildPublicHeader.class
 nl\sogyo\ocatrainer\CreateCompileAndReturn.class
 nl\sogyo\ocatrainer\AuthenticationService.class
-nl\sogyo\ocatrainer\BuildPrivateUI.class
+nl\sogyo\ocatrainer\BuildPublicContent.class
+nl\sogyo\ocatrainer\BuildPrivateHeader.class
 nl\sogyo\ocatrainer\LoginDropDownMenu.class
-nl\sogyo\ocatrainer\BuildPublicUI.class

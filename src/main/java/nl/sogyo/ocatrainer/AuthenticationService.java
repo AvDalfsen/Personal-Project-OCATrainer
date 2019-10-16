@@ -22,7 +22,7 @@ class AuthenticationService {
             if (rememberMe) {
                 rememberUser(username);
             }
-            UI.getCurrent().getPage().executeJavaScript("location.reload();");
+            UI.getCurrent().getPage().executeJs("location.reload();");
             return true;
         }
         return false;
@@ -38,7 +38,7 @@ class AuthenticationService {
 
         VaadinSession.getCurrent().close();
         UI.getCurrent().navigate("");
-        UI.getCurrent().getPage().executeJavaScript("location.reload();");
+        UI.getCurrent().getPage().executeJs("location.reload();");
     }
 
     private Optional<Cookie> getRememberMeCookie() {

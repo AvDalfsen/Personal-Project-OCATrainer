@@ -1,6 +1,6 @@
 nl\sogyo\ocatrainer\BuildPrivateContent.class
+nl\sogyo\ocatrainer\MainView.class
 nl\sogyo\ocatrainer\BuildPrivateMenu.class
-nl\sogyo\ocatrainer\BuildPublicMenu.class
 nl\sogyo\ocatrainer\DatabaseRequests.class
 nl\sogyo\ocatrainer\UserService.class
 nl\sogyo\ocatrainer\BuildPublicHeader.class

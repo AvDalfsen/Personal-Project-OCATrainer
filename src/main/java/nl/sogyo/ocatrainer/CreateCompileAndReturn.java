@@ -3,17 +3,35 @@ package nl.sogyo.ocatrainer;
 import javax.tools.*;
 import java.io.*;
 import java.util.Collections;
+import java.util.Date;
 
 class CreateCompileAndReturn {
+    private String fileName = "";
     String createCompileFile(String code) throws IOException {
-        File file = new File("test.java");
+        File dir = new File("./userfiles/");
+        File[] directoryListing = dir.listFiles();
+        if (directoryListing != null) {
+            for (File child : directoryListing) {
+                long diff = new Date().getTime() - child.lastModified();
+                if(diff > 1000 * 60 * 5) child.delete();
+            }
+        }
+
+        // Changes print to println to avoid a potential stack overflow through e.g. while(true) System.out.print("a"); --> one long line
+        if(code.contains("print(")) code = code.replace("print(", "println(");
+
+        if(code.contains("import ")) return "Please remove any import statements; all necessary libraries have already been imported.";
+
+        try {
+            fileName = code.substring(code.lastIndexOf("public class ") + 13, code.indexOf("{"));
+            fileName = fileName.trim();
+        } catch (StringIndexOutOfBoundsException e){
+            return "Your code needs to be contained in a public class.";
+        }
+
+        File file = new File("./userfiles/"+fileName+".java");
         file.delete();
-        File newFile = new File("test.java");
-
-            //Add functionality to simply create a new file. Create a new iteration of the file. Remove all files but the ones created in the last minute or so.
-
-        if (file.createNewFile()) System.out.println("File is created!");
-        else System.out.println("File already exists.");
+        File newFile = new File("./userfiles/"+fileName+".java");
 
         FileWriter writer = new FileWriter(file);
         writer.write("import java.util.*;\n\n" + code);
@@ -43,21 +61,21 @@ class CreateCompileAndReturn {
 
     private String runFile() {
         ProcessBuilder processBuilder = new ProcessBuilder();
-        processBuilder.command("cmd.exe", "/c", "java test.java");
+        processBuilder.command("cmd.exe", "/c", "java ./userfiles/" + fileName + ".java");
 
         StringBuilder compileResults = new StringBuilder();
 
         try {
             Process process = processBuilder.start();
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(process.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             String line;
             int counter = 0;
             while ((line = reader.readLine()) != null) {
                 counter++;
                 compileResults.append(line);
-                if(counter == 1000) return "Computer says: \"No.\"\n\n1000 lines of output counted. Assumed stack overflow.\nProgram aborted.";
+                if(counter == 1000) return "Computer says: \"No.\"\n\nExcessive output. Assumed stack overflow.\nProgram aborted.";
+
             }
 
         } catch (IOException e) {

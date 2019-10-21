@@ -16,11 +16,12 @@ public class MainView extends AppLayout {
         } else {
             showPrivateComponent();
         }
+
     }
 
     private void showPublicComponent() {
         addToNavbar(new BuildPublicHeader());
-        addToDrawer(new BuildPublicMenu());
+        setDrawerOpened(false);
         setContent(new BuildPublicContent());
     }
 

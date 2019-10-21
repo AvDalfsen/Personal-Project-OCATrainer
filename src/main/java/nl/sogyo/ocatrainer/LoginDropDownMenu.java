@@ -34,6 +34,7 @@ class LoginDropDownMenu extends HorizontalLayout {
         passwordField.setMinLength(1);
         passwordField.setErrorMessage("Please enter a password.");
         Checkbox rememberMe = new Checkbox("Remember me");
+
         Button loginButton = new Button("Login");
         Button newUserButton = new Button("New User");
 
@@ -63,15 +64,16 @@ class LoginDropDownMenu extends HorizontalLayout {
         submitNewUserButton.addClickListener(buttonClickEvent -> {
             try {
                 new DatabaseRequests().updateDatabase(
-                        "INSERT INTO users(username, password, email) VALUES (\""+newUsernameField.getValue()+"\",\""+newPasswordField.getValue()+"\",\""+newEmailField.getValue()+"\")");
+                        "INSERT INTO users(username, password, email) VALUES (\""+
+                                newUsernameField.getValue()+"\",\""+
+                                new UserService().hashPassword(newPasswordField.getValue())+"\",\""+
+                                newEmailField.getValue()+"\")");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
                 Notification.show("That username and/or email is already taken.", 4000, Notification.Position.MIDDLE);
             }
         });
-        cancelButton.addClickListener(buttonClickEvent -> popupContent.removeAll());
-        cancelButton.addClickListener(buttonClickEvent -> popupContent.add(usernameField, passwordField, loginButton, newUserButton));
 
         popupContent.add(usernameField, passwordField, rememberMe, loginButton, newUserButton);
 

@@ -1,6 +1,7 @@
 package nl.sogyo.ocatrainer;
 
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinSession;
 
@@ -25,6 +26,7 @@ class AuthenticationService {
             UI.getCurrent().getPage().executeJs("location.reload();");
             return true;
         }
+        Notification.show("Unknown username/password combination. Please note that both username and password are case sensitive", 4000, Notification.Position.MIDDLE);
         return false;
     }
 

@@ -20,17 +20,17 @@ public class CreateCompileAndReturnTest {
 
     @Test
     public void fileCreationTest() throws IOException {
-        ccr.createCompileFile("Henk");
-        File file = new File("test.java");
+        ccr.createCompileFile("public class Henk{");
+        File file = new File("./userfiles/Henk.java");
 
         assertTrue("When run, a new file should be created called test.java (this may change as the program develops, keep in mind).",file.exists());
     }
 
     @Test
     public void fileCreationContentTest() throws IOException {
-        ccr.createCompileFile("Henk");
+        ccr.createCompileFile("public class Henk{");
         StringBuilder contentBuilder = new StringBuilder();
-        Stream<String> stream = Files.lines(Paths.get("test.java"), StandardCharsets.UTF_8);
+        Stream<String> stream = Files.lines(Paths.get("./userfiles/Henk.java"), StandardCharsets.UTF_8);
         stream.forEach(s -> contentBuilder.append(s).append("\n"));
 
         assertTrue("When run with parameter 'Henk', the created file should contain the string 'Henk'",contentBuilder.toString().contains("Henk"));

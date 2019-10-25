@@ -35,19 +35,19 @@ class BuildPrivateContent extends VerticalLayout {
         exerciseDescription.setId("exercise-description");
 
         codeField.setId("code-field");
-        codeField.setMinWidth("42em");
+        codeField.setMinWidth("39em");
 
         TextArea compileResults = new TextArea("Just look at 'dem results!");
         compileResults.setId("compile-results");
         compileResults.setReadOnly(true);
-        compileResults.setMinWidth("42em");
+        compileResults.setMinWidth("39em");
 
         AtomicReference<String> code = new AtomicReference<>("");
         AtomicReference<String> results = new AtomicReference<>("");
         Button compileButton = new Button("Compile!");
 
         HorizontalLayout testLayout = new HorizontalLayout();
-        testLayout.setWidthFull();
+        testLayout.setWidth("80%");
 
         compileButton.addClickListener(click -> {
             try {
@@ -88,6 +88,11 @@ class BuildPrivateContent extends VerticalLayout {
             page.executeJs("document.getElementById(\"code-field\").value = \'" + javaScriptFuckeryCode + "\'");
         });
 
+        HorizontalLayout buttonLayout = new HorizontalLayout();
+        buttonLayout.setWidth("80%");
+        buttonLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
+        buttonLayout.add(compileButton, saveButton, loadOriginalCode);
+
         add(
                 exerciseTitle,
                 exerciseDescription,
@@ -95,13 +100,8 @@ class BuildPrivateContent extends VerticalLayout {
                         codeField,
                         compileResults
                 ),
-                compileButton,
                 testLayout,
-                new HorizontalLayout(
-                        saveButton,
-                        loadOriginalCode
-                )
-
+                buttonLayout
         );
     }
 
@@ -161,7 +161,7 @@ class BuildPrivateContent extends VerticalLayout {
             i++;
         }
         testResultDisplay.setWidthFull();
-        testResultDisplay.setJustifyContentMode(JustifyContentMode.CENTER);
+        testResultDisplay.setJustifyContentMode(JustifyContentMode.EVENLY);
         return testResultDisplay;
     }
 }

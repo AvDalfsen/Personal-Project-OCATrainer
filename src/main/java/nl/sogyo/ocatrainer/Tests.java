@@ -30,9 +30,9 @@ public class Tests {
                 testResults.put("The code should compile!", results.contains("compiled successfully"));
                 testResults.put("The code should contain a method called 'newMethod'.", code.contains("newMethod("));
                 try {
-                    testResults.put("The new method should be accessible to everyone.", methodLine.contains("public"));
-                    testResults.put("The new method should not return anything.", methodLine.contains("void"));
-                    testResults.put("The new method should have a parameter", methodLine.contains("(String"));
+                    testResults.put("newMethod() should be accessible to everyone.", methodLine.contains("public"));
+                    testResults.put("newMethod() should not return anything.", methodLine.contains("void"));
+                    testResults.put("newMethod() should have a parameter", methodLine.contains("(String"));
                 } catch (NullPointerException e) {
                     testResults.put("Some tests require the code to contain a method called 'newMethod' in order to be able run.", false);
                 }

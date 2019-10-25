@@ -1,0 +1,4 @@
+insert into exercises (idexercises, initial_code, description, title) VALUES('1', 'public class ExerciseOne {\n\tpublic static void main(String[] args){\n\t\t//Put your write statement here!\n\t}\n}', 'Write a statement that will print out something that contains the number 8.', 'Printing');
+insert into exercises (idexercises, initial_code, description, title) VALUES('2', 'public class ExerciseTwo {\n\tpublic static void main(String[] args){\n\t	}\n\t	//Create your new method here. Call it "newMethod"\n}', 'Create a new method that is available to everyone, returns nothing, and has to be called with a String parameter.', 'Creating methods');
+delete from exercises where idexercises = '1';
+select * from exercises;

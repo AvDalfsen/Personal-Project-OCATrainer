@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 class BuildPrivateHeader extends VerticalLayout {
     BuildPrivateHeader() {
-        addClassName("main-view");
+        addClassName("main-header");
         setSizeFull();
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         H1 header = new H1("OCA Trainer");

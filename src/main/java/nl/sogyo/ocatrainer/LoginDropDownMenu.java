@@ -53,14 +53,22 @@ class LoginDropDownMenu extends HorizontalLayout {
         Button submitNewUserButton = new Button("Submit new user");
         Button cancelButton = new Button("Cancel");
 
+        passwordField.setClassName("text-field");
+        newPasswordField.setClassName("text-field");
+        usernameField.setClassName("text-field");
+        newUsernameField.setClassName("text-field");
+        newEmailField.setClassName("text-field");
+        rememberMe.setClassName("checkbox");
+
         //Buttons
         loginButton.addClickListener(buttonClickEvent -> {
             try { new AuthenticationService().login(usernameField.getValue(), passwordField.getValue(), rememberMe.getValue()); }
             catch (SQLException | ClassNotFoundException e) { e.printStackTrace(); }
         });
 
-        newUserButton.addClickListener(buttonClickEvent -> popupContent.removeAll());
-        newUserButton.addClickListener(buttonClickEvent -> popupContent.add(newUsernameField, newPasswordField, newEmailField, submitNewUserButton, cancelButton));
+        newUserButton.addClickListener(buttonClickEvent -> {popupContent.removeAll();
+                                                            popupContent.add(newUsernameField, newPasswordField, newEmailField, submitNewUserButton, cancelButton);
+        });
         submitNewUserButton.addClickListener(buttonClickEvent -> {
             try {
                 new DatabaseRequests().updateDatabase(
@@ -73,6 +81,11 @@ class LoginDropDownMenu extends HorizontalLayout {
             } catch (SQLException e) {
                 Notification.show("That username and/or email is already taken.", 4000, Notification.Position.MIDDLE);
             }
+        });
+
+        cancelButton.addClickListener(buttonClickEvent -> {
+            popupContent.removeAll();
+            popupContent.add(usernameField, passwordField, rememberMe, loginButton, newUserButton);
         });
 
         popupContent.add(usernameField, passwordField, rememberMe, loginButton, newUserButton);

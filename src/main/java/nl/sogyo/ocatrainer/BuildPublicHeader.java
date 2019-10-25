@@ -10,7 +10,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 class BuildPublicHeader extends VerticalLayout {
     BuildPublicHeader() {
-        addClassName("main-view");
+        addClassName("main-header");
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         H1 header = new H1("OCA Trainer");
         header.getElement().getThemeList().add("dark");

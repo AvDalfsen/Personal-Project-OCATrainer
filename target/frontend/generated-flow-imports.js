@@ -13,6 +13,7 @@ import '@vaadin/vaadin-ordered-layout/theme/lumo/vaadin-horizontal-layout.js';
 import '@vaadin/vaadin-button/theme/lumo/vaadin-button.js';
 import '@vaadin/flow-frontend/flow-component-renderer.js';
 import '@vaadin/vaadin-notification/theme/lumo/vaadin-notification.js';
+import '@vaadin/flow-frontend/js/tooltip/tooltips.js';
 import '@vaadin/vaadin-text-field/theme/lumo/vaadin-text-area.js';
 import '@vaadin/vaadin-cookie-consent/theme/lumo/vaadin-cookie-consent.js';
 import '@vaadin/vaadin-text-field/theme/lumo/vaadin-text-field.js';

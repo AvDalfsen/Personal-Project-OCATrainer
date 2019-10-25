@@ -21,12 +21,13 @@ class CreateCompileAndReturn {
         if(code.contains("print(")) code = code.replace("print(", "println(");
 
         if(code.contains("import ")) return "Please remove any import statements; all necessary libraries have already been imported.";
+        if(code.contains("java.")) return "No funny business!";
 
         try {
             fileName = code.substring(code.lastIndexOf("public class ") + 13, code.indexOf("{"));
             fileName = fileName.trim();
         } catch (StringIndexOutOfBoundsException e){
-            return "Your code needs to be contained in a public class.";
+            return "Your code needs to be contained in a (public) class.";
         }
 
         File file = new File("./userfiles/"+fileName+".java");
@@ -34,7 +35,7 @@ class CreateCompileAndReturn {
         File newFile = new File("./userfiles/"+fileName+".java");
 
         FileWriter writer = new FileWriter(file);
-        writer.write("import java.util.*;\n\n" + code);
+        writer.write("import java.util.*;\nimport java.time.*;\n\n" + code);
         writer.close();
         return compileRequest(newFile);
     }
@@ -51,7 +52,7 @@ class CreateCompileAndReturn {
         String diagnosticResults = "";
 
         for (Diagnostic diagnostic : diagnostics.getDiagnostics()) {
-            diagnosticResults = "Error found at line " + (diagnostic.getLineNumber() - 2) + "\n" + diagnostic.getCode() + " - "
+            diagnosticResults = "Error found at line " + (diagnostic.getLineNumber() - 3) + "\n" + diagnostic.getCode() + " - "
                     + diagnostic.getKind() + " - " + diagnostic.getMessage(null);
         }
         manager.close();
@@ -73,14 +74,13 @@ class CreateCompileAndReturn {
             int counter = 0;
             while ((line = reader.readLine()) != null) {
                 counter++;
-                compileResults.append(line);
+                compileResults.append(line).append("\n");
                 if(counter == 1000) return "Computer says: \"No.\"\n\nExcessive output. Assumed stack overflow.\nProgram aborted.";
-
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Code compiled succesfully!\n\n" + compileResults.toString();
+        return "Code compiled successfully!\n\n" + compileResults.toString();
     }
 }

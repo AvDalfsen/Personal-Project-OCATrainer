@@ -1,6 +1,32 @@
-.main-view h1 {
-               width: 100%;
-               margin: 0;
-               padding: 16px;
-               font-size: 40px;
-           }
+.main-header
+            h1 {
+                width: 100%;
+                margin: 0;
+                padding: 16px;
+                font-size: 40px;
+            }
+
+.main-content
+            h2 {
+            }
+
+            h5{
+                font-weight: normal;
+            }
+
+.red {color: red;}
+
+.green {color: green;}
+
+.checkbox {font-size: 20px;}
+
+.text-field {
+                font-size: 15px;
+                margin: 0;
+            }
+
+.menu-button {
+                font-size: 14px;
+                margin: 0;
+                background: white;
+             }

@@ -9,3 +9,4 @@ nl\sogyo\ocatrainer\AuthenticationService.class
 nl\sogyo\ocatrainer\BuildPublicContent.class
 nl\sogyo\ocatrainer\BuildPrivateHeader.class
 nl\sogyo\ocatrainer\LoginDropDownMenu.class
+nl\sogyo\ocatrainer\Tests.class

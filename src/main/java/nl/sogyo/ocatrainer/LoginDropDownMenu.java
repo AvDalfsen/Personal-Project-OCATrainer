@@ -76,6 +76,9 @@ class LoginDropDownMenu extends HorizontalLayout {
                                 newUsernameField.getValue()+"\",\""+
                                 new UserService().hashPassword(newPasswordField.getValue())+"\",\""+
                                 newEmailField.getValue()+"\")");
+                Notification.show("Hello and welcome, " + newUsernameField.getValue() + "!\nFeel free to log in.", 4000, Notification.Position.TOP_CENTER);
+                popupContent.removeAll();
+                popupContent.add(usernameField, passwordField, rememberMe, loginButton, newUserButton);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {

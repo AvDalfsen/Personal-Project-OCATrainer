@@ -24,7 +24,6 @@ import static java.lang.Integer.parseInt;
 
 class BuildPrivateContent extends VerticalLayout {
     private String SESSION_EXERCISE = "exercise-id";
-
     private TextArea codeField = new TextArea("Code your heart out.");
     BuildPrivateContent() {
         addClassName("main-content");
@@ -106,7 +105,6 @@ class BuildPrivateContent extends VerticalLayout {
     }
 
     void changeExercise(int exerciseID) {
-        remove();
         String initial_code = new DatabaseRequests().queryDatabase("SELECT initial_code FROM exercises WHERE idexercises = \"" + exerciseID + "\"");
         String user = VaadinSession.getCurrent().getAttribute("username").toString();
         String saved_code = new DatabaseRequests().queryDatabase("SELECT saved_code FROM performance " +
@@ -139,6 +137,7 @@ class BuildPrivateContent extends VerticalLayout {
 
     private HorizontalLayout testResults(String results, String code) throws IOException {
         HorizontalLayout testResultDisplay = new HorizontalLayout();
+        testResultDisplay.setClassName("fade-out ");
         int exerciseNumber = parseInt(VaadinSession.getCurrent().getAttribute(SESSION_EXERCISE).toString());
         Map<String, Boolean> testResults = new Tests().runTests(results, code, exerciseNumber);
         int i = 1;
@@ -149,13 +148,12 @@ class BuildPrivateContent extends VerticalLayout {
             if ((boolean) value) {
                 printTestResult.setText("Test " + i + " passed!");
                 printTestResult.setClassName("green");
-                Tooltips.getCurrent().setTooltip(printTestResult,key);
+                Tooltips.getCurrent().setTooltip(printTestResult, key);
                 testResultDisplay.add(printTestResult);
-            }
-            else {
+            } else {
                 printTestResult.setText("Test " + i + " failed!");
                 printTestResult.setClassName("red");
-                Tooltips.getCurrent().setTooltip(printTestResult,key);
+                Tooltips.getCurrent().setTooltip(printTestResult, key);
                 testResultDisplay.add(printTestResult);
             }
             i++;

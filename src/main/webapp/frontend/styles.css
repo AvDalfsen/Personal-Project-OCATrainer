@@ -30,3 +30,20 @@
                 margin: 0;
                 background: white;
              }
+
+.fade-out {
+    -webkit-animation: fadeinout 10s linear forwards;
+    animation: fadeinout 10s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+  0% { opacity: 1; }
+  50% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  0% { opacity: 1; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+ }

@@ -3,6 +3,7 @@ package nl.sogyo.ocatrainer;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -21,7 +22,7 @@ class BuildPublicHeader extends VerticalLayout {
         header.add(headerLayout);
         header.setWidthFull();
         add(header);
-        add("Welcome to the OCA Trainer!");
+        add(new Label("Welcome to the OCA Trainer!"));
 
         CookieConsent cookieNotification = new CookieConsent(
                 "This website uses cookies to ensure you have the best user experience",

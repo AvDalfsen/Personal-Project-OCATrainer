@@ -47,9 +47,11 @@ class LoginDropDownMenu extends HorizontalLayout {
         newPasswordField.setPlaceholder("Password");
         newPasswordField.setMinLength(8);
         newPasswordField.setErrorMessage("Please enter a password of at least 8 characters.");
+        newPasswordField.isPreventInvalidInput();
         EmailField newEmailField = new EmailField("Your E-Mail");
         newEmailField.setValue("example@replace.me");
         newEmailField.setErrorMessage("Please enter a valid email address.");
+        newEmailField.isPreventInvalidInput();
         Button submitNewUserButton = new Button("Submit new user");
         Button cancelButton = new Button("Cancel");
 
@@ -70,19 +72,21 @@ class LoginDropDownMenu extends HorizontalLayout {
                                                             popupContent.add(newUsernameField, newPasswordField, newEmailField, submitNewUserButton, cancelButton);
         });
         submitNewUserButton.addClickListener(buttonClickEvent -> {
-            try {
-                new DatabaseRequests().updateDatabase(
-                        "INSERT INTO users(username, password, email) VALUES (\""+
-                                newUsernameField.getValue()+"\",\""+
-                                new UserService().hashPassword(newPasswordField.getValue())+"\",\""+
-                                newEmailField.getValue()+"\")");
-                Notification.show("Hello and welcome, " + newUsernameField.getValue() + "!\nFeel free to log in.", 4000, Notification.Position.TOP_CENTER);
-                popupContent.removeAll();
-                popupContent.add(usernameField, passwordField, rememberMe, loginButton, newUserButton);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                Notification.show("That username and/or email is already taken.", 4000, Notification.Position.MIDDLE);
+            if(newPasswordField.getValue().length() >= newPasswordField.getMinLength()) {
+                try {
+                    new DatabaseRequests().updateDatabase(
+                            "INSERT INTO users(username, password, email) VALUES (\"" +
+                                    newUsernameField.getValue() + "\",\"" +
+                                    new UserService().hashPassword(newPasswordField.getValue()) + "\",\"" +
+                                    newEmailField.getValue() + "\")");
+                    Notification.show("Hello and welcome, " + newUsernameField.getValue() + "!\nFeel free to log in.", 4000, Notification.Position.TOP_CENTER);
+                    popupContent.removeAll();
+                    popupContent.add(usernameField, passwordField, rememberMe, loginButton, newUserButton);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    Notification.show("That username and/or email is already taken.", 4000, Notification.Position.MIDDLE);
+                }
             }
         });
 

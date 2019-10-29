@@ -30,7 +30,7 @@ class BuildPrivateContent extends VerticalLayout {
         H2 exerciseTitle = new H2("Welcome to the exercises! Feel free to pick one from the menu.");
         exerciseTitle.setId("exercise-title");
 
-        H5 exerciseDescription = new H5("Hello there, " + VaadinSession.getCurrent().getAttribute("username").toString() + "!");
+        H5 exerciseDescription = new H5(" ");
         exerciseDescription.setId("exercise-description");
 
         codeField.setId("code-field");

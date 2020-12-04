@@ -5,7 +5,7 @@
     "@polymer/polymer": "3.2.0",
     "@vaadin/flow-deps": "./target/frontend",
     "@webcomponents/webcomponentsjs": "^2.2.10",
-    "highlight.js": "^9.15.10"
+    "highlight.js": "^10.4.1"
   },
   "devDependencies": {
     "webpack": "4.30.0",
